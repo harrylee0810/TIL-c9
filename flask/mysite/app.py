@@ -40,7 +40,7 @@ def send():
 def receive():
     name = request.args.get('who')
     message = request.args.get('message')
-    
+
     with open('guestbook.csv','a', encoding='utf8', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=['who','message'])
         writer.writerow({
@@ -48,7 +48,7 @@ def receive():
             'message':message
         })
     
-    return render_template('receive.html', name_in_html=name, message_in_html=message)
+    return render_template('receive.html', name_in_html=name, message_in_html=message, result=result)
 
 
 @app.route('/guestbook')
