@@ -7,7 +7,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-        
+
+
+#Post : Comment = 1 : N
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
+    
+    
 #1. Create
 #post = Post(title='Hello',content='world!')
 #post.save()

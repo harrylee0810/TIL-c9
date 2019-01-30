@@ -7,6 +7,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+    
+
+
         
 #1. Create
 #post = Post(title='Hello',content='world!')
