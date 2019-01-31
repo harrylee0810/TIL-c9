@@ -18,3 +18,18 @@ def index(request):
 def detail(request, q_id):
     question = Question.objects.get(pk=q_id)
     return render(request, 'detail1.html', {'question': question})
+
+def delete(request, q_id):
+    question = Question.objects.get(pk=q_id)
+    question.delete()
+    return redirect('poll:index')
+
+def choice_create(request, q_id):
+    question = Question.objects.get(pk=q_id)
+    content = request.POST.get('content')
+    votes = request.POST.get('votes')
+    
+    choice = Choice(question = question, content=content, votes=votes)
+    choice.save()
+    
+    return redirect('poll:detail', question.pk)

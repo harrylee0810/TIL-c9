@@ -8,7 +8,28 @@
 </head>
 <body>
     <h1>Detail</h1>
-    <p> title: {{question.title}}</p>
+    <p> 투표주제: {{question.title}}</p>
     <a href="{% url 'poll:index' %}">back to list</a>
+    <a href="{% url 'poll:delete' question.pk %}"> Delete </a>
+    
+    <form action="{% url 'poll:choice_create' question.pk %}" method="post">
+        {% csrf_token %}
+        <select name="content" id="">
+            <option>한식</option>
+            <option>중식</option>
+            <option>일식</option>
+        </select>
+        <input type="text" name="votes"/>
+        <input type="submit" value="Submit"/>
+    
+    <ul>
+        {% for choice in question.choice_set.all %}
+        <li> {{choice.content }}</li>
+        <li> {{choice.votes }}</li>
+        {% endfor %}
+    </ul>
+    
+    
+    </form>
 </body>
 </html>

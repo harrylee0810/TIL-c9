@@ -11,8 +11,9 @@
     <a href="{% url 'poll:new' %}">새 글 작성하기</a>
     <ul>
         {% for question in questions %}
-            <li><a href="{% url 'poll:detail' question.pk %}"> title: {{question.title}}</li></a>
+            <li><a href="{% url 'poll:detail' question.pk %}"> 투표주제: {{question.title}}</li></a>
         {% endfor %}
     </ul>
+
 </body>
 </html>
