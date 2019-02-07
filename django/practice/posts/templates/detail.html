@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block container %}
+    <h1>Post detail</h1>
+    <p> title: {{post.title}}</p>
+    <p> content: {{post.content}}</p>
+    <img src="{{ post.image.url }}"></img>
+    
+    <a href="{% url 'posts:list' %}"> Back to list</a>
+    <a href="{% url 'posts:delete' post.pk %}"> delete </a>
+    <a href="{% url 'posts:edit' post.pk %}"> Edit</a>
+    
+    <form action="{% url 'posts:comments_create' post.pk %}" method="post">
+        {% csrf_token %}
+        댓글 : <input type="text" name="content"/>
+        <input type="submit" value="Submit"/>
+    </form>
+    
+    <ul>
+        {% for comment in post.comment_set.all %}
+        <li> {{comment.content }} <a href="{% url 'posts:comments_delete' post.pk comment.pk %}">댓글 삭제</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
